@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+#main-container {
+    text-align: center;
+}
+
+#section-selection {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 400px;
+
+    .btn {
+        border-radius: 0;
+    }
+}

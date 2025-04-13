@@ -1,0 +1,11 @@
+{
+    "_id": 1,
+    "title": "Psychoanalyse und Religion",
+    "year": 1966,
+    "genre": "Psychologie",
+    "abstract": "Vorlesung an der Yale Universtität",
+    "summary": "",
+    "rating": 7,
+    "authors": ["Erich Fromm"],
+    "keywords": ["Psychologie", "Religion", "Psychoanalyse"]
+}

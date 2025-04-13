@@ -1,0 +1,29 @@
+<div>
+    <h3>Bücher</h3>
+    <div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Titel</th>
+                <th scope="col">AutorInnen</th>
+                <th scope="col">Jahr</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Bewertung</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (book of library; track book.id) {
+                    <tr>
+                        <th>{{book.id}}</th>
+                        <th>{{book.title}}</th>
+                        <th>{{book.authorString}}</th>
+                        <th>{{book.year}}</th>
+                        <th>{{book.genre}}</th>
+                        <th>{{book.rating}}</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

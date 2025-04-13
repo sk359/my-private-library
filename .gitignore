@@ -1,0 +1,5 @@
+.vscode
+node_modules
+bin
+Backend/obj
+Backend/wwwroot
