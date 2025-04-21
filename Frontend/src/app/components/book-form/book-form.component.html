@@ -1,17 +1,57 @@
+<div>
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
 
-    <label for="first-name">Titel:</label>  
-    <input id="book-title" type="text" formControlName="title" />
+    <div class="row">
 
-    <label for="first-name">Jahr:</label>  
-    <input id="book-year" type="text" formControlName="year" />
+    <div class="col">
+      <label for="book-title" class="form-label">Titel:</label>  
+      <input id="book-title" class="form-control" type="text" formControlName="title" />
+    </div>
+ 
+    <div class="col">
+      <label for="book-year" class="form-label">Jahr:</label>  
+      <input id="book-year" class="form-control" type="text" formControlName="year" />
+    </div>
 
-    <label for="first-name">Genre:</label>  
-    <input id="book-year" type="text" formControlName="year" />
-    <select formControlName="genre">        
-        @for (genre of genres; track genre) {
-            <option [ngValue]="genre">{{genre}}</option>
-        }
-    </select>
+    <div class="col">
+        <label for="book-author" class="form-label">Autor*in:</label>  
+        <input id="book-author" class="form-control" type="text" formControlName="author" />
+    </div>
+
+    <div class="col">
+        <label for="book-genre" class="form-label">Genre:</label>       
+        <select id="book-genre" class="form-select" formControlName="genre">        
+          @for (genre of genres; track genre) {
+              <option [ngValue]="genre">{{genre}}</option>
+          }
+        </select>
+    </div>
+
+    <div class="col">
+        <label for="book-keywords">Stichwörter</label>
+        <select multiple class="form-select" id="book-keywords">
+            @for (kw of keywords; track kw) {
+                <option [ngValue]="kw">{{kw}}</option>
+            }
+        </select>
+    </div>
+
+    <div class="col">
+        <label for="book-abstract" class="form-label">Kurzzusammenfassung:</label>  
+        <textarea id="book-abstract" class="form-control" type="text" formControlName="abstract"></textarea>
+    </div>
+
+    <div class="col">
+        <label for="book-summary" class="form-label">Inhalt:</label>  
+        <textarea id="book-summary" class="form-control" type="text" formControlName="summary"></textarea>
+    </div>  
+    
+    <div class="col">
+        <label for="book-rating" class="form-label">Bewertung (1-5):</label>  
+        <input id="book-rating" class="form-control" type="number" formControlName="rating" min="1" max="5" />
+    </div>
+
+    </div>
 
 </form>
+</div>

@@ -15,15 +15,17 @@ export class BookFormComponent {
   @Input()
   book: Book | null = null;
   
-  genres: string[] = [];
+  genres: string[] = ["Roman", "Soziologie"];
+  keywords: string[] = ["Roman", "Soziologie"];
   
   bookForm = new FormGroup({
-      title: new FormControl(''),
-      year: new FormControl(''),
-      genre: new FormControl(''),
-      abstract: new FormControl(''),
-      summary: new FormControl(''),
-      rating: new FormControl(1),
+      title: new FormControl(this.book?.title || ''),
+      year: new FormControl(this.book?.year || ''),
+      author: new FormControl(''), // TODO
+      genre: new FormControl(this.book?.genre || ''),
+      abstract: new FormControl(this.book?.abstract || ''),
+      summary: new FormControl(this.book?.summary || ''),
+      rating: new FormControl(this.book?.rating || 1),
   });
   
   onSubmit() {
