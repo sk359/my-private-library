@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Book } from '../classes/book';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
+import { Book, DatabaseBook } from '@app/classes/book';
+import { BackendService } from '@app/services/backend.service';
+
+const baseUrl = "http://localhost:5085/books";
 
 
 @Injectable({
@@ -9,25 +12,27 @@ import { Book } from '../classes/book';
 })
 export class BookServiceService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: BackendService) {}
 
-  getAllBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`/api/books/`);  
+  async getAllBooks(): Promise<Book[]> {
+    const databaseBooks: DatabaseBook[] = await this.http.get(baseUrl);
+    return databaseBooks.map(book => Book.fromDatabase(book));
+
   }
   
-  getBook(id: number): Observable<Book> {    
-    return this.http.get<Book>(`/api/books/${id}`);  
+  async getBook(id: number): Promise<Book> {    
+    return this.http.get(`${baseUrl}/${id}`);  
   }
 
-  createBook(book: Book): Observable<Book> {    
-    return this.http.post<Book>(`/api/books/`, book);  
+  async createBook(book: Book): Promise<Book> {    
+    return this.http.post(`${baseUrl}`, book);  
   }
 
-  editBook(book: Book): Observable<Book> {    
-    return this.http.put<Book>(`/api/books/`, book);  
+  editBook(book: Book): Promise<Book> {    
+    return this.http.put(`${baseUrl}`, book);  
   }
 
-  deleteBook(id: number): Observable<Book> {    
-    return this.http.delete<Book>(`/api/books/${id}`);  
+  deleteBook(id: number): Promise<Book> {    
+    return this.http.delete(`${baseUrl}/${id}`);  
   }
 }

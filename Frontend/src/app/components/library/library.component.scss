@@ -1,0 +1,10 @@
+#library-table-wrapper {
+    display: inline-flex;
+    width: 60%;
+}
+
+.book-button-col {
+    button:not(:first-child) { 
+        margin-left:10px;
+    }
+}

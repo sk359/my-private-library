@@ -1,7 +1,21 @@
 using orderentry.Models;
 using orderentry.Repositories;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("*")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();  
+                          
+                      });
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -26,6 +40,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

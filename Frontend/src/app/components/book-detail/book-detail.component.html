@@ -1,0 +1,16 @@
+<div class="card" style="width: 18rem;">
+    <h5 class="card-header" [ngStyle]="getBackgroundColor().toStyleObject()">{{book?.title}}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{book?.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{book?.authorString}} ({{book?.year}})</h6>
+      <h6 class="card-subtitle mb-2 text-muted">{{book?.genre}}</h6>
+      <p>Stichwörter:</p>
+      @for (keyword of book?.keywords; track keyword) {
+        <span class="badge bg-secondary">{{keyword}}</span>
+      }
+      <hr>
+      <p class="card-text">{{book?.abstract}}</p>
+      <hr>
+      <p class="card-text">{{book?.summary}}</p>      
+  </div>
+</div>

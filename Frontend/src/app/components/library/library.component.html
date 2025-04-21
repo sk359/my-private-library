@@ -1,29 +1,60 @@
 <div>
     <h3>Bücher</h3>
-    <div>
+    <div id="library-table-wrapper">
         <table class="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Titel</th>
+                <th scope="col" style="text-align: left;">Titel</th>
                 <th scope="col">AutorInnen</th>
                 <th scope="col">Jahr</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Bewertung</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
                 @for (book of library; track book.id) {
                     <tr>
-                        <th>{{book.id}}</th>
-                        <th>{{book.title}}</th>
-                        <th>{{book.authorString}}</th>
-                        <th>{{book.year}}</th>
-                        <th>{{book.genre}}</th>
-                        <th>{{book.rating}}</th>
+                        <td>{{book.id}}</td>
+                        <td style="text-align: left;">{{book.title}}</td>
+                        <td>{{book.authorString}}</td>
+                        <td>{{book.year}}</td>
+                        <td>{{book.genre}}</td>
+                        <td>{{book.rating}}</td>
+                        <td class="book-button-col">                              
+                            <button title="Buch ansehen" type="button"  class="btn btn-success" (click)="showDetails(book)">
+                                <i class="bi bi-book"></i>    
+                            </button>                      
+                            <button title="Buch bearbeiten" type="button" class="btn btn-info" (click)="editBook(book.id)">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button title="Buch löschen" type="button" class="btn btn-danger" (click)="deleteBook(book.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+
+<div class="modal" tabindex="-1" id="detailModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detailansicht</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <app-book-detail [book]="selectedBook"></app-book-detail>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>          
+        </div>
+      </div>
+    </div>
+  </div>
+  

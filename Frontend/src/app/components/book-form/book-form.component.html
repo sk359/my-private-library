@@ -1,0 +1,17 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+
+    <label for="first-name">Titel:</label>  
+    <input id="book-title" type="text" formControlName="title" />
+
+    <label for="first-name">Jahr:</label>  
+    <input id="book-year" type="text" formControlName="year" />
+
+    <label for="first-name">Genre:</label>  
+    <input id="book-year" type="text" formControlName="year" />
+    <select formControlName="genre">        
+        @for (genre of genres; track genre) {
+            <option [ngValue]="genre">{{genre}}</option>
+        }
+    </select>
+
+</form>

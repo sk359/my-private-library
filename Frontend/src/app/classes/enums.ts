@@ -6,3 +6,11 @@ export enum Keyword {
     JUDENTUM = "Judentum",
     POLITIK = "Politik"
 }
+
+export enum Genre {
+    ROMAN = "Roman",
+    POLITIK = "Politik",
+    RELIGION = "Religion",
+    SOZIOLOGIE = "Soziologie",
+    PSYCHOLOGIE = "Psychologie"
+}
