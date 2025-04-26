@@ -58,4 +58,12 @@ public class BookController : Controller
         //return CreatedAtAction(nameof(Get), new { id = book.id }, book);
     }
 
+    [HttpPut]
+    public async Task<ActionResult<Book>> Edit([FromBody] Book book)
+    {        
+        await _bookRepository.UpdateAsync(book.id, book);    
+        return Ok(book);  
+        //return CreatedAtAction(nameof(Get), new { id = book.id }, book);
+    }
+
 }

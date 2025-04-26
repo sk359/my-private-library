@@ -6,9 +6,10 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col" style="text-align: left;">Titel</th>
-                <th scope="col">AutorInnen</th>
+                <th scope="col">Autor*In</th>
                 <th scope="col">Jahr</th>
                 <th scope="col">Genre</th>
+                <th scope="col">Stichwörter</th>
                 <th scope="col">Bewertung</th>
                 <th></th>
               </tr>
@@ -21,19 +22,20 @@
                         <td>{{book.authorString}}</td>
                         <td>{{book.year}}</td>
                         <td>{{book.genre}}</td>
+                        <td>{{book.keywordString}}</td>
                         <td>{{book.rating}}</td>
                         <td class="book-button-col">                              
                             <button title="Buch ansehen" type="button"  class="btn btn-success" (click)="showDetails(book)">
                                 <i class="bi bi-book"></i>    
                             </button>                      
-                            <button title="Buch bearbeiten" type="button" class="btn btn-info" (click)="editBook(book.id)">
+                            <button title="Buch bearbeiten" type="button" class="btn btn-info" (click)="editBook(book)">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                             <button title="Buch löschen" type="button" class="btn btn-danger" (click)="deleteBook(book.id)">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </td>
-                    </tr>
+                    </tr>                    
                 }
             </tbody>
         </table>
@@ -57,4 +59,21 @@
       </div>
     </div>
   </div>
+
+  <div class="modal bd-example-modal-lg" tabindex="-1" id="editModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Bearbeiten</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <app-book-form [book]="selectedBook" (onSave)="onSave($event)"></app-book-form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>          
+        </div>
+      </div>
+    </div>
+  </div>  
   

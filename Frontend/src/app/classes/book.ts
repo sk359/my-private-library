@@ -11,7 +11,7 @@ export interface DatabaseBook {
     shortSummary: string;
     summary?: string;
     rating: number; 
-    //keywords: string[];
+    keywords: string[];
 }
 
 
@@ -24,7 +24,7 @@ export class Book {
     shortSummary: string;
     summary?: string;
     rating: number; 
-    //keywords: Keyword[] = [];
+    keywords: Keyword[] = [];
 
     /**
      * 
@@ -48,10 +48,14 @@ export class Book {
         return this.author;
     }
 
+    public get keywordString(): string {
+        return this.keywords.join(" | ");
+    }
+
     public static fromDatabase(book: DatabaseBook): Book {
         const bookObject = new Book(book.id, book.title, book.year, book.author, book.genre, book.shortSummary, book.summary, book.rating);
         //bookObject.authors = book.authors.map(name => new Author(name));
-        //bookObject.keywords = book.keywords as Keyword[];
+        bookObject.keywords = book.keywords as Keyword[];
         return bookObject;
     }
 

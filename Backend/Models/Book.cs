@@ -6,6 +6,9 @@ namespace orderentry.Models;
 
 /**
 * Uses Bson:  Binary Javascript Object Notation
+* [Required] vs required:
+* [Required] => Validates that the field isn't null. (Validation attributes let you specify validation rules for model properties. )
+* required (since C# 11) => Any expression that initializes a new instance of the type must initialize all required members
 */
 
 public class Book
@@ -50,23 +53,8 @@ public class Book
     [Required]
     public required string author { get; set; }
     
-    //[BsonElement("keywords")]
-   // public ICollection<string> keywords { get; set; } = [];
-
-    /*
-    public Book(int id, string title, int year, string genre, string abstractText, string summary, int rating)
-    {
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.genre = genre;
-        this.shortSummary = abstractText;
-        this.summary = summary;
-        this.rating = rating;
-    }
-    */
-
-    // instead of declaring a constructor the attributes can be decorated with [Required]
-
+    [BsonElement("keywords")]
+    public ICollection<string> keywords { get; set; } = [];
+    
     
 }
