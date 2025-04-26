@@ -1,15 +1,19 @@
 import { Component, ViewChild, Input } from '@angular/core';
 import * as bootstrap from 'bootstrap';
 // import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Book } from '@app/classes/book';
 import { BookServiceService } from '@app/services/book-service.service';
 import { BookDetailComponent } from '@app/components/book-detail/book-detail.component';
 import { BookFormComponent } from '@app/components/book-form/book-form.component';
+import { EventManagerService } from '@app/services/event-manager.service';
+
 
 @Component({
   selector: 'app-library',
   standalone: true,
   imports: [BookDetailComponent, BookFormComponent],
+  //providers: [EventManagerService], // when used it does not work! Has to be taken frpm parent component?
   templateUrl: './library.component.html',
   styleUrl: './library.component.scss'
 })
@@ -17,16 +21,29 @@ export class LibraryComponent {
   
   library: Book[] = [];
   selectedBook: Book | null = null;  
+  subscription: Subscription;
 
   @Input()
   limit: number = -1;
 
   @ViewChild('detailModal') detailModal: any;
 
-  constructor(private bookService: BookServiceService, private _backend: BookServiceService) { }
+  constructor(
+    private bookService: BookServiceService, 
+    private _backend: BookServiceService, 
+    private eventManager: EventManagerService) { 
+      this.subscription = eventManager.newBookCreate$.subscribe( (newValue) => {
+        this.loadLibrary();
+      });
+    }
 
   async ngOnInit() {
     this.loadLibrary();
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
   }
 
   private async loadLibrary() {

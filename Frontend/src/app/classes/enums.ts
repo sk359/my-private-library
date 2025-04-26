@@ -4,7 +4,8 @@ export enum Keyword {
     CHRISTENTUM = "Christentum",
     BUDDHISMUS = "Buddhismus",
     JUDENTUM = "Judentum",
-    POLITIK = "Politik"
+    POLITIK = "Politik",
+    PHILOSOPHIE = "Philosophie"
 }
 
 export enum Genre {
@@ -12,5 +13,7 @@ export enum Genre {
     POLITIK = "Politik",
     RELIGION = "Religion",
     SOZIOLOGIE = "Soziologie",
-    PSYCHOLOGIE = "Psychologie"
+    PSYCHOLOGIE = "Psychologie",
+    PROGRAMMING = "Progrmmierung",
+    PHILOSOPHIE = "Philosophie"
 }

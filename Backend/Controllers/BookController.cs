@@ -63,9 +63,9 @@ public class BookController : Controller
     [HttpPost]
     public async Task<ActionResult<Book>> Post([FromBody] Book book)
     {
-        var maxIdBook = _bookRepository.GetHighestId();
-        Console.Write("Max ID", maxIdBook);
-        var nextId = maxIdBook.Id + 1;
+        var maxIdBook = await _bookRepository.GetHighestId();
+        Console.Write(maxIdBook);
+        var nextId = maxIdBook.id + 1;
         book.id = nextId;
         await _bookRepository.CreateAsync(book);    
         return Ok(book);  

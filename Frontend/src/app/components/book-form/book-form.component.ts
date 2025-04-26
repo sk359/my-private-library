@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 import {FormControl, ReactiveFormsModule, FormGroup} from '@angular/forms';
 import { Book } from '@app/classes/book';
 import { Keyword } from '@app/classes/enums';
+import { Genre as GenreEnum, Keyword as KeywordEnum } from '@app/classes/enums';
 
 
 
@@ -21,8 +22,8 @@ export class BookFormComponent implements OnChanges {
 
   constructor() {}
   
-  genres: string[] = ["Roman", "Soziologie"];
-  keywords: string[] = ["Roman", "Soziologie"];
+  genres: string[] = Object.values(GenreEnum) as string[];
+  keywords: string[] = Object.values(KeywordEnum) as string[];
 
   bookForm = new FormGroup({
     id: new FormControl(-1),
@@ -37,6 +38,10 @@ export class BookFormComponent implements OnChanges {
 });
 
   ngOnChanges() {
+    this.clearForm();
+  }
+  
+  clearForm() {
     this.bookForm = new FormGroup({
       id: new FormControl(this.book?.id || -1),
       title: new FormControl(this.book?.title || ''),
@@ -50,10 +55,9 @@ export class BookFormComponent implements OnChanges {
     });
   }
   
-  
-  
   onSubmit() {    
-    this.onSave.emit(this.bookForm.value as any);      
+    this.onSave.emit(this.bookForm.value as any);  
+    this.clearForm();    
   }
 
 }

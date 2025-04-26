@@ -31,12 +31,16 @@ export class BookDetailComponent {
   @Input()
   book!: Book | null;
 
+  // TODO: has to be updated whenever a value is added
+  // Property '[Genre.XXX]' does not exist on type ...
   genreStyle = {
       [Genre.POLITIK]: new GenreStyle("blue", "white"),
       [Genre.RELIGION]: new GenreStyle("white"), 
       [Genre.ROMAN]: new GenreStyle("red", "white"), 
       [Genre.SOZIOLOGIE]: new GenreStyle("green", "white"), 
       [Genre.PSYCHOLOGIE]: new GenreStyle("lightblue"), 
+      [Genre.PROGRAMMING]: new GenreStyle("gray"), 
+      [Genre.PHILOSOPHIE]: new GenreStyle("lightgreen"), 
     };
 
   getBackgroundColor(): GenreStyle {
