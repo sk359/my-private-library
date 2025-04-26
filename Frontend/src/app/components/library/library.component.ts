@@ -1,10 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import * as bootstrap from 'bootstrap';
 // import { Observable } from 'rxjs';
 import { Book } from '@app/classes/book';
 import { BookServiceService } from '@app/services/book-service.service';
 import { BookDetailComponent } from '@app/components/book-detail/book-detail.component';
-import { Genre } from '@app/classes/enums';
 import { BookFormComponent } from '@app/components/book-form/book-form.component';
 
 @Component({
@@ -17,9 +16,10 @@ import { BookFormComponent } from '@app/components/book-form/book-form.component
 export class LibraryComponent {
   
   library: Book[] = [];
-  selectedBook: Book | null = null;
-  //editMode = false;
-  //books$: Observable<Book[]>;
+  selectedBook: Book | null = null;  
+
+  @Input()
+  limit: number = -1;
 
   @ViewChild('detailModal') detailModal: any;
 
@@ -30,15 +30,16 @@ export class LibraryComponent {
   }
 
   private async loadLibrary() {
-    this.library = await this.bookService.getAllBooks();
+    const lmt = this.limit && this.limit > -0 ? this.limit : undefined; 
+    console.log("limit", this.limit);
+    this.library = await this.bookService.getAllBooks(lmt);
     console.log(this.library);
   }
 
   showDetails(book: Book) {
     this.selectedBook = book;  
     const myModalAlternative = new bootstrap.Modal('#detailModal', { keyboard: false });
-    myModalAlternative.show();
-    //this.detailModal.nativeElement.show();
+    myModalAlternative.show();   
   }
 
   async editBook(book: Book) {
@@ -47,14 +48,21 @@ export class LibraryComponent {
     myModalAlternative.show();
   }
 
-  deleteBook(bookId: number) {
-    console.log("delete", bookId);    
+  async deleteBook(bookId: number) {
+    await this._backend.deleteBook(bookId);
+    this.loadLibrary();
   }  
 
-  onSave(book: any) {
-    console.log("onsave", book);
-    //book.authors = [book.authors];
-    this._backend.editBook(book);
+  async onSave(book: any) {    
+    await this._backend.editBook(book);    
+    const myModalEl = document.getElementById('editModal');
+    const modal = bootstrap.Modal.getInstance(myModalEl as any);
+    modal?.hide();
+    this.loadLibrary();    
+  }  
+
+  disableEdit(): boolean {
+    return !Boolean(this.limit) || this.limit > 0; 
   }  
   
 }

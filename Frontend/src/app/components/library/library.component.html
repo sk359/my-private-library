@@ -1,5 +1,4 @@
-<div>
-    <h3>Bücher</h3>
+<div>    
     <div id="library-table-wrapper">
         <table class="table">
             <thead>
@@ -28,7 +27,7 @@
                             <button title="Buch ansehen" type="button"  class="btn btn-success" (click)="showDetails(book)">
                                 <i class="bi bi-book"></i>    
                             </button>                      
-                            <button title="Buch bearbeiten" type="button" class="btn btn-info" (click)="editBook(book)">
+                            <button title="Buch bearbeiten" type="button" class="btn btn-info" [disabled]="disableEdit()" (click)="editBook(book)">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                             <button title="Buch löschen" type="button" class="btn btn-danger" (click)="deleteBook(book.id)">

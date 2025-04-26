@@ -14,10 +14,11 @@ export class BookServiceService {
 
   constructor(private http: BackendService) {}
 
-  async getAllBooks(): Promise<Book[]> {
-    const databaseBooks: DatabaseBook[] = await this.http.get(baseUrl);
+  async getAllBooks(limit: number = -1): Promise<Book[]> {
+    const params = new URLSearchParams();
+    params.append("limit", limit.toString());
+    const databaseBooks: DatabaseBook[] = await this.http.get(`${baseUrl}?${params}`);
     return databaseBooks.map(book => Book.fromDatabase(book));
-
   }
   
   async getBook(id: number): Promise<Book> {    

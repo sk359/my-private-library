@@ -1,3 +1,14 @@
+<div style="padding:20px">
 <div>
     <app-book-form (onSave)="onSave($event)"></app-book-form>
+</div>
+
+<hr style="margin-top:20px">
+
+<div>
+    <h4>Zuletzt hinzugefügt:</h4>
+    <div>
+        <app-library [limit]="5"></app-library>
+    </div>
+</div>
 </div>

@@ -27,6 +27,15 @@ public class BookRepository
     public async Task<List<Book>> GetAsync() =>
         await _booksCollection.Find(_ => true).ToListAsync();
 
+    public async Task<List<Book>> GetLastBooks(int limit) 
+    {
+        //if (genre != null) {
+        //   return await _booksCollection.Find(x => x.genre == genre).SortByDescending(d => d.id).Limit(limit).ToListAsync();
+        //} else {
+        return await _booksCollection.Find(x => true).SortByDescending(d => d.id).Limit(limit).ToListAsync();
+        //}
+    }
+
     public async Task<Book?> GetAsync(int id) =>
         await _booksCollection.Find(x => x.id == id).FirstOrDefaultAsync();
 

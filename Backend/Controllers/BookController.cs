@@ -19,11 +19,25 @@ public class BookController : Controller
     }
 
     [HttpGet]
-    public async Task<List<Book>> Get()   // TODO return Task (due to async Database access)
-    {        
-        return await _bookRepository.GetAsync();
-
+    public async Task<List<Book>> GetAll(int? limit)   // TODO return Task (due to async Database access)
+    {      
+        Console.Write(limit);  
+        if (limit != null && limit > 0) {
+          return await _bookRepository.GetLastBooks((int)limit);  
+        } else {
+            return await _bookRepository.GetAsync();
+        }
     }
+
+    /*
+
+    [HttpGet("filtered")]
+    public async Task<List<Book>> Get([FromQuery] int limit, string? genre)  // [FromQuery(Name = "genre")
+    {
+        Console.Write(limit);
+        return await _bookRepository.GetLastBooks(limit, genre);       
+    }
+    */
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Book>> Get(int id)
@@ -62,8 +76,14 @@ public class BookController : Controller
     public async Task<ActionResult<Book>> Edit([FromBody] Book book)
     {        
         await _bookRepository.UpdateAsync(book.id, book);    
-        return Ok(book);  
-        //return CreatedAtAction(nameof(Get), new { id = book.id }, book);
+        return Ok(book);          
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Book>> Delete(int id)
+    {        
+        await _bookRepository.RemoveAsync(id);    
+        return Ok(id);          
     }
 
 }

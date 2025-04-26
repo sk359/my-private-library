@@ -41,9 +41,8 @@ public class Book
     [Required]
     public required string shortSummary { get; set; }
 
-    [BsonElement("summary")]
-    [Required]
-    public required string summary { get; set; }
+    [BsonElement("summary")]    
+    public string? summary { get; set; }
 
     [BsonElement("rating")]
     [Required]
