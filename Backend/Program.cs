@@ -20,6 +20,7 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 //  appsettings.json section registered in the Dependency Injection (DI) container
 builder.Services.Configure<LibraryDatabaseSettings>(
     builder.Configuration.GetSection("LibraryDatabase"));

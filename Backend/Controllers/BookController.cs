@@ -6,6 +6,7 @@ using orderentry.Repositories;
 namespace orderentry.Controllers;
 
 [Route("books")]
+[ApiController]    
 public class BookController : Controller
 {
     private readonly ILogger<BookController> _logger;
@@ -19,8 +20,7 @@ public class BookController : Controller
 
     [HttpGet]
     public async Task<List<Book>> Get()   // TODO return Task (due to async Database access)
-    {
-        
+    {        
         return await _bookRepository.GetAsync();
 
     }
@@ -44,6 +44,18 @@ public class BookController : Controller
     {
         return await _bookRepository.GetByGenre(genre);
        
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Book>> Post([FromBody] Book book)
+    {
+        var maxIdBook = _bookRepository.GetHighestId();
+        Console.Write("Max ID", maxIdBook);
+        var nextId = maxIdBook.Id + 1;
+        book.id = nextId;
+        await _bookRepository.CreateAsync(book);    
+        return Ok(book);  
+        //return CreatedAtAction(nameof(Get), new { id = book.id }, book);
     }
 
 }

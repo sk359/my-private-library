@@ -28,13 +28,13 @@ public class BookRepository
         await _booksCollection.Find(_ => true).ToListAsync();
 
     public async Task<Book?> GetAsync(int id) =>
-        await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        await _booksCollection.Find(x => x.id == id).FirstOrDefaultAsync();
 
     public async Task<List<Book>> GetByGenre(string genre) 
     {
         var results = 
             from book in _booksCollection.AsQueryable()
-            where book.Genre == genre
+            where book.genre == genre
             select book;
 
         return results.ToList();
@@ -44,8 +44,11 @@ public class BookRepository
         await _booksCollection.InsertOneAsync(newBook);
 
     public async Task UpdateAsync(int id, Book updatedBook) =>
-        await _booksCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+        await _booksCollection.ReplaceOneAsync(x => x.id == id, updatedBook);
 
     public async Task RemoveAsync(int id) =>
-        await _booksCollection.DeleteOneAsync(x => x.Id == id);
+        await _booksCollection.DeleteOneAsync(x => x.id == id);
+
+    public async Task<Book?> GetHighestId() =>
+       await _booksCollection.Find(x => true).SortByDescending(d => d.id).Limit(1).FirstOrDefaultAsync();
 }

@@ -27,18 +27,20 @@
         </select>
     </div>
 
+    <!--
     <div class="col">
         <label for="book-keywords">Stichwörter</label>
-        <select multiple class="form-select" id="book-keywords">
+        <select multiple class="form-select" id="book-keywords" formControlName="keywords">
             @for (kw of keywords; track kw) {
                 <option [ngValue]="kw">{{kw}}</option>
             }
         </select>
     </div>
+    -->
 
     <div class="col">
         <label for="book-abstract" class="form-label">Kurzzusammenfassung:</label>  
-        <textarea id="book-abstract" class="form-control" type="text" formControlName="abstract"></textarea>
+        <textarea id="book-abstract" class="form-control" type="text" formControlName="shortSummary"></textarea>
     </div>
 
     <div class="col">
@@ -49,6 +51,10 @@
     <div class="col">
         <label for="book-rating" class="form-label">Bewertung (1-5):</label>  
         <input id="book-rating" class="form-control" type="number" formControlName="rating" min="1" max="5" />
+    </div>
+
+    <div class="col">
+      <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid">Ok</button>
     </div>
 
     </div>

@@ -4,12 +4,12 @@
       <h5 class="card-title">{{book?.title}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{book?.authorString}} ({{book?.year}})</h6>
       <h6 class="card-subtitle mb-2 text-muted">{{book?.genre}}</h6>
-      <p>Stichwörter:</p>
+      <!--<p>Stichwörter:</p>
       @for (keyword of book?.keywords; track keyword) {
         <span class="badge bg-secondary">{{keyword}}</span>
-      }
+    }-->
       <hr>
-      <p class="card-text">{{book?.abstract}}</p>
+      <p class="card-text">{{book?.shortSummary}}</p>
       <hr>
       <p class="card-text">{{book?.summary}}</p>      
   </div>
