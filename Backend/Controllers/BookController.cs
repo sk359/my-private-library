@@ -46,10 +46,11 @@ public class BookController : Controller
 
         if (book is null)
         {
-            return NotFound();
+            var customResponse = new { message = $"Buch mit ID {id} nicht gefunden" };
+            return NotFound(customResponse);
         }
 
-        return book;
+        return Ok(book);
     }
    
 
@@ -65,7 +66,7 @@ public class BookController : Controller
     {
         var maxIdBook = await _bookRepository.GetHighestId();
         Console.Write(maxIdBook);
-        var nextId = maxIdBook.id + 1;
+        var nextId = maxIdBook == null ? 1 : maxIdBook.id + 1; // TODO: replace with auto increment
         book.id = nextId;
         await _bookRepository.CreateAsync(book);    
         return Ok(book);  

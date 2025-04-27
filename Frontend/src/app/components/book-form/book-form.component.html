@@ -1,5 +1,5 @@
 <div>
-<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()" novalidate>
 
     <div class="row">
 
@@ -11,6 +11,8 @@
     <div class="col">
       <label for="book-year" class="form-label">Jahr:</label>  
       <input id="book-year" class="form-control" type="text" formControlName="year" />
+      @if (year?.invalid && year?.hasError('invalidYear')) {  
+        <div>{{yearErrorWarning}}</div>              }
     </div>
 
     <div class="col">
