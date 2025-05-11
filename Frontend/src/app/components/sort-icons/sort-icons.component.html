@@ -1,0 +1,5 @@
+@if (showDescIcon()) {
+  <div class="cursor-pointer" (click)="toggleDirection()"><i class="bi bi-sort-numeric-down"></i></div>
+} @else if (showAscIcon()) {
+  <div class="cursor-pointer" (click)="toggleDirection()"><i class="bi bi-sort-numeric-up"></i></div>
+}

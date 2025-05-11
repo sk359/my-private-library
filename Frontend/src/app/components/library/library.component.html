@@ -9,7 +9,7 @@
                 <th scope="col">Jahr</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Stichwörter</th>
-                <th scope="col">Bewertung</th>
+                <th scope="col" class="flex"><span class="mr-5">Bewertung</span><app-sort-icons [isActive]="false" (sortOrderChanged)="sortByRating($event)"/></th>
                 <th></th>
               </tr>
             </thead>
